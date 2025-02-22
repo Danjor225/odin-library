@@ -32,7 +32,10 @@ function displayBooks(){
 
 }
 
-
+function clearElement(toClear){
+    toClear.innerHTML = ""
+    
+}
 
 const addBookBtn = document.querySelector('#addBook')
 addBookBtn.addEventListener('click', (e)  => {
@@ -53,6 +56,8 @@ addBookBtn.addEventListener('click', (e)  => {
     submitButton.textContent ='Submit'
     submitButton.addEventListener('click', () =>{
         addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, readInput.value)
+        clearElement(newBookDisplay)
+        clearElement(libraryDisplay)
         displayBooks()
     })
 })
