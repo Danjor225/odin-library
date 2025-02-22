@@ -33,6 +33,7 @@ function displayBooks(){
 }
 
 
+
 const addBookBtn = document.querySelector('#addBook')
 addBookBtn.addEventListener('click', (e)  => {
     let titleInput = document.createElement('input')
@@ -47,6 +48,13 @@ addBookBtn.addEventListener('click', (e)  => {
     let readInput = document.createElement('input')
     newBookDisplay.appendChild(readInput)
     readInput.placeholder = 'Read? Yes or No'
+    let submitButton = document.createElement('button')
+    newBookDisplay.appendChild(submitButton)
+    submitButton.textContent ='Submit'
+    submitButton.addEventListener('click', () =>{
+        addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, readInput.value)
+        displayBooks()
+    })
 })
 
     
