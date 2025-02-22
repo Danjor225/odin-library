@@ -10,5 +10,17 @@ body{
 #libraryContainer{
     display: flex;
     gap: 10px;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+#libraryDisplay{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+#libraryDisplay>div{
+    font-weight: bold;
+    font-size: 1.5rem;
 }

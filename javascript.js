@@ -9,7 +9,7 @@ function Book(title, author, pages, read){
     this.pages = pages
     this.read = read
     this.displayBookContent = function(){
-        return `${this.title} by ${this.author} with ${pages} no of pages`
+        return `${this.title} by ${this.author} with ${pages} pages. Read? -> ${read}`
     };
 
 }
@@ -38,6 +38,15 @@ addBookBtn.addEventListener('click', (e)  => {
     let titleInput = document.createElement('input')
     newBookDisplay.appendChild(titleInput)
     titleInput.placeholder = 'Title Of Book'
+    let authorInput = document.createElement('input')
+    newBookDisplay.appendChild(authorInput)
+    authorInput.placeholder = 'Author Of Book'
+    let pagesInput = document.createElement('input')
+    newBookDisplay.appendChild(pagesInput)
+    pagesInput.placeholder = 'No Of Pages'
+    let readInput = document.createElement('input')
+    newBookDisplay.appendChild(readInput)
+    readInput.placeholder = 'Read? Yes or No'
 })
 
     
@@ -46,7 +55,7 @@ addBookBtn.addEventListener('click', (e)  => {
 
 
 addBookToLibrary('Lord of the Rings', 'J.R.R Tolkien', 268, 'No')
-addBookToLibrary('Jordans Life', 'Jordan', 1, 'Y')
+addBookToLibrary('Jordans Life', 'Jordan', 1, 'Yes')
 displayBooks();
 
 
