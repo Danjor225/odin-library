@@ -81,6 +81,7 @@ addBookBtn.addEventListener('click', (e)  => {
     let pagesInput = document.createElement('input')
     newBookDisplay.appendChild(pagesInput)
     pagesInput.placeholder = 'No Of Pages'
+    pagesInput.setAttribute('type', 'number')
     let readInput = document.createElement('input')
     newBookDisplay.appendChild(readInput)
     readInput.placeholder = 'Read? Yes or No'
