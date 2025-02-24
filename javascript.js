@@ -20,6 +20,17 @@ function addBookToLibrary(title, author, pages, read){
     myLibrary.push(book)
 }
 
+function addButtonToBook(){
+    let bookToAddButton = libraryDisplay.lastChild
+    let buttonToAdd = document.createElement('button')
+    buttonToAdd.textContent = "Remove Book"
+    buttonToAdd.addEventListener('click', () => {
+        // code to remove book from library list
+
+    })
+    bookToAddButton.appendChild(buttonToAdd)
+}
+
 function displayBooks(){
 
     myLibrary.forEach(element => {
@@ -59,6 +70,7 @@ addBookBtn.addEventListener('click', (e)  => {
         clearElement(newBookDisplay)
         clearElement(libraryDisplay)
         displayBooks()
+        addButtonToBook()
     })
 })
 
