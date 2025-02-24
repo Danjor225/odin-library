@@ -26,18 +26,39 @@ function addButtonToBook(){
     buttonToAdd.textContent = "Remove Book"
     buttonToAdd.addEventListener('click', () => {
         // code to remove book from library list
+        let bookIndexNum = findBookIndexNum(bookToAddButton.firstChild.textContent)
+       myLibrary.splice(bookIndexNum, 1)
+        bookToAddButton.remove()
+        console.log(myLibrary)
 
     })
     bookToAddButton.appendChild(buttonToAdd)
+}
+
+function findBookIndexNum(toCheckFor){
+    let indexNum
+    myLibrary.forEach(book => {
+        let bookSentenceToCheck = book.displayBookContent()
+        if(bookSentenceToCheck == toCheckFor){
+            indexNum =  myLibrary.findIndex((bookToCheck) => bookToCheck === book)
+            
+        }
+
+    })
+    return indexNum
+
 }
 
 function displayBooks(){
 
     myLibrary.forEach(element => {
         
-        bookDisplay = document.createElement('div')
-        libraryDisplay.appendChild(bookDisplay)
+        bookContainer = document.createElement('div')
+        libraryDisplay.appendChild(bookContainer)
+        bookDisplay = document.createElement('p')
+        bookContainer.appendChild(bookDisplay)
         bookDisplay.textContent = element.displayBookContent()
+        addButtonToBook()
 
     });
 
@@ -50,6 +71,7 @@ function clearElement(toClear){
 
 const addBookBtn = document.querySelector('#addBook')
 addBookBtn.addEventListener('click', (e)  => {
+    addBookBtn.disabled = true;
     let titleInput = document.createElement('input')
     newBookDisplay.appendChild(titleInput)
     titleInput.placeholder = 'Title Of Book'
@@ -70,7 +92,8 @@ addBookBtn.addEventListener('click', (e)  => {
         clearElement(newBookDisplay)
         clearElement(libraryDisplay)
         displayBooks()
-        addButtonToBook()
+        addBookBtn.disabled = false;
+        
     })
 })
 
