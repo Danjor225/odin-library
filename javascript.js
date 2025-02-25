@@ -9,7 +9,7 @@ function Book(title, author, pages, read){
     this.pages = pages
     this.read = read
     this.displayBookContent = function(){
-        return `${this.title} by ${this.author} with ${pages} pages. Read? -> ${read}`
+        return `${this.title} by ${this.author} with ${pages} pages.`
     };
 
 }
@@ -29,7 +29,7 @@ function addButtonToBook(){
         let bookIndexNum = findBookIndexNum(bookToAddButton.firstChild.textContent)
        myLibrary.splice(bookIndexNum, 1)
         bookToAddButton.remove()
-        console.log(myLibrary)
+    
 
     })
     bookToAddButton.appendChild(buttonToAdd)
@@ -49,6 +49,36 @@ function findBookIndexNum(toCheckFor){
 
 }
 
+function addReadBtn(){
+    let bookToAddButton = libraryDisplay.lastChild
+    let buttonToAdd = document.createElement('button')
+    buttonToAdd.textContent = "Read?"
+    let libraryIndexNum = findBookIndexNum(bookToAddButton.firstChild.textContent)
+    
+    setReadBtnColor(myLibrary[libraryIndexNum].read, buttonToAdd)
+    buttonToAdd.addEventListener('click', () => {
+        // code to change read status
+        
+        myLibrary[libraryIndexNum].read = !myLibrary[libraryIndexNum].read
+        
+        setReadBtnColor(myLibrary[libraryIndexNum].read, buttonToAdd)
+    })
+    bookToAddButton.appendChild(buttonToAdd)
+}
+
+function setReadBtnColor(bookObjReadBtn, buttonToAdd){
+
+    
+    if(bookObjReadBtn){
+            
+        buttonToAdd.style.backgroundColor = 'green'
+    } else {
+        buttonToAdd.style.backgroundColor ='red'
+    }
+    
+
+}
+
 function displayBooks(){
 
     myLibrary.forEach(element => {
@@ -59,9 +89,10 @@ function displayBooks(){
         bookContainer.appendChild(bookDisplay)
         bookDisplay.textContent = element.displayBookContent()
         addButtonToBook()
-
+        addReadBtn()
+        
     });
-
+    
 }
 
 function clearElement(toClear){
@@ -82,14 +113,19 @@ addBookBtn.addEventListener('click', (e)  => {
     newBookDisplay.appendChild(pagesInput)
     pagesInput.placeholder = 'No Of Pages'
     pagesInput.setAttribute('type', 'number')
+    let readTitle = document.createElement('span')
+    newBookDisplay.appendChild(readTitle)
+    readTitle.textContent = "Read?"
     let readInput = document.createElement('input')
     newBookDisplay.appendChild(readInput)
-    readInput.placeholder = 'Read? Yes or No'
+    readInput.setAttribute('type', 'checkbox')
     let submitButton = document.createElement('button')
     newBookDisplay.appendChild(submitButton)
     submitButton.textContent ='Submit'
     submitButton.addEventListener('click', () =>{
-        addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, readInput.value)
+       let readChecked = readInput.checked
+       console.log(readChecked)
+        addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, readChecked)
         clearElement(newBookDisplay)
         clearElement(libraryDisplay)
         displayBooks()
@@ -103,8 +139,8 @@ addBookBtn.addEventListener('click', (e)  => {
 
 
 
-addBookToLibrary('Lord of the Rings', 'J.R.R Tolkien', 268, 'No')
-addBookToLibrary('Jordans Life', 'Jordan', 1, 'Yes')
+addBookToLibrary('Lord of the Rings', 'J.R.R Tolkien', 268, false)
+addBookToLibrary('Jordans Life', 'Jordan', 1, true)
 displayBooks();
 
 
